@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".DiagnosticApplication"
+        android:allowBackup="true"
+        android:largeHeap="true"
+        android:label="峻爸 AI Transcriber R4"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false">
+
+        <!-- Minimal process: no Whisper/Gemini classes are referenced by the launcher. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="unspecified">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Full transcriber isolated in another process so a crash returns to the safe launcher. -->
+        <activity
+            android:name=".TranscriberActivity"
+            android:exported="false"
+            android:process=":transcriber"
+            android:screenOrientation="unspecified" />
+    </application>
+</manifest>

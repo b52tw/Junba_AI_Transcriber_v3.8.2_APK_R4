@@ -1,0 +1,8 @@
+R4 Diagnostic build design
+==========================
+- Safe launcher Activity is the only LAUNCHER activity.
+- Full transcriber is isolated in android:process=":transcriber".
+- Application-level UncaughtExceptionHandler stores Java/Kotlin crash stack traces.
+- Safe launcher references full Activity by class-name string to avoid eager class loading.
+- Build uses clean compile + assembleDebug.
+- APK artifact is uploaded before optional diagnostics.
